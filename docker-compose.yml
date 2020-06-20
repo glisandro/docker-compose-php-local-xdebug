@@ -1,0 +1,16 @@
+version: '3'
+services:
+    apptest:
+        build:
+            context: .
+            dockerfile: ./apptest/docker/php-apache/Dockerfile
+        image: glisandro/apptest
+        container_name: apptest
+        #environment:
+            #XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9000 remote_enable=1
+        ports:
+            - 8080:80
+            - 9000:9000
+        volumes:
+            - ./apptest:/var/www/html
+            - ./apptest/docker/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf
